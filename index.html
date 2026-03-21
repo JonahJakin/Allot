@@ -73,7 +73,9 @@ html, body {
   display: flex; align-items: center;
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding-bottom: max(var(--safe), 20px);
+  padding-bottom: max(env(safe-area-inset-bottom), 20px);
+  margin: 0;
+  width: 100%;
   flex-shrink: 0;
 }
 .nav-btn {
@@ -285,7 +287,7 @@ html, body {
 .sheet-save:active { opacity: .85; }
 
 .page-header {
-  padding: 56px 24px 20px;
+  padding: 44px 24px 16px;
   display: flex; align-items: flex-end; justify-content: space-between;
 }
 .page-title { font-size: 28px; font-weight: 600; font-family: 'Fraunces', serif; color: var(--text); }
@@ -363,7 +365,7 @@ html, body {
 .ob-page {
   position: absolute; inset: 0;
   display: flex; flex-direction: column;
-  padding: 56px 28px 40px;
+  padding: 44px 28px 40px;
   opacity: 0; transform: translateX(32px);
   transition: opacity .52s cubic-bezier(.25,0,.2,1), transform .52s cubic-bezier(.25,0,.2,1), visibility 0s linear .52s;
   pointer-events: none; overflow-y: auto; visibility: hidden;
