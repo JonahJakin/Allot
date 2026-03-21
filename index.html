@@ -38,10 +38,11 @@
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 html, body {
-  width: 100%; height: 100%; overflow: hidden;
+  width: 100%; min-height: 100%;
   background: #1a1a1f; color: var(--text);
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
+  -webkit-overflow-scrolling: touch;
 }
 
 .bg-glow {
@@ -53,15 +54,15 @@ html, body {
 
 .app {
   position: relative; z-index: 1;
-  width: 100%; min-height: 100vh;
+  width: 100%; max-width: 430px; margin: 0 auto;
   background: var(--bg);
+  padding-top: env(safe-area-inset-top);
 }
 
 .pages { position: relative; }
 .page {
   display: none;
   padding-bottom: calc(80px + env(safe-area-inset-bottom));
-  max-width: 430px; margin: 0 auto;
 }
 .page.active { display: block; }
 
@@ -72,7 +73,7 @@ html, body {
   display: flex;
   justify-content: space-around;
   padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
-  border-radius: 20px 20px 0 0;
+  border-top: 1px solid var(--border);
   box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
   z-index: 100;
 }
@@ -89,7 +90,7 @@ html, body {
 
 .home-header {
   display: flex; align-items: center; justify-content: space-between;
-  padding: calc(env(safe-area-inset-top, 44px) + 44px) 24px 12px;
+  padding: 20px 24px 12px;
 }
 .home-greeting { font-size: 13px; color: var(--sub); font-weight: 400; }
 .home-month {
@@ -286,7 +287,7 @@ html, body {
 .sheet-save:active { opacity: .85; }
 
 .page-header {
-  padding: calc(env(safe-area-inset-top, 44px) + 48px) 24px 16px;
+  padding: 20px 24px 16px;
   display: flex; align-items: flex-end; justify-content: space-between;
 }
 .page-title { font-size: 28px; font-weight: 600; font-family: 'Fraunces', serif; color: var(--text); }
