@@ -52,38 +52,36 @@ html, body {
 }
 
 .app {
-  position: fixed; inset: 0; z-index: 1;
-  display: flex; flex-direction: column;
+  position: relative; z-index: 1;
+  width: 100%; min-height: 100vh;
   background: var(--bg);
 }
 
-.pages { flex: 1; overflow: hidden; position: relative; min-height: 0; }
+.pages { position: relative; }
 .page {
-  position: absolute; inset: 0;
-  overflow-y: auto;
-  opacity: 0; pointer-events: none;
-  transition: opacity .25s cubic-bezier(.2,0,.2,1);
-  padding-bottom: 80px;
+  display: none;
+  padding-bottom: calc(80px + env(safe-area-inset-bottom));
   max-width: 430px; margin: 0 auto;
 }
-.page.active { opacity: 1; pointer-events: all; }
+.page.active { display: block; }
 
 .nav {
-  width: 100%; z-index: 10;
-  display: flex; align-items: flex-end;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
   background: var(--surface);
-  border-top: 1px solid var(--border);
-  padding-bottom: calc(env(safe-area-inset-bottom) + 8px);
-  flex-shrink: 0;
-}
-.nav-inner {
-  display: flex; width: 100%; max-width: 430px; margin: 0 auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0 calc(12px + env(safe-area-inset-bottom));
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+  z-index: 100;
 }
 .nav-btn {
   flex: 1; display: flex; flex-direction: column;
-  align-items: center; gap: 3px;
-  padding: 8px 0 0; border: none; background: none; cursor: pointer;
+  align-items: center; gap: 4px;
+  border: none; background: none; cursor: pointer;
   color: var(--sub2); transition: color .2s;
+  font-family: 'DM Sans', sans-serif;
 }
 .nav-btn.active { color: var(--accent); }
 .nav-btn svg { width: 22px; height: 22px; }
@@ -874,7 +872,6 @@ input, select, textarea { font-size: 16px !important; }
   </div>
 
   <nav class="nav">
-    <div class="nav-inner">
     <button class="nav-btn active" id="navHome" onclick="switchTab('home')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12v8a1 1 0 0 0 1 1h4v-5h4v5h4a1 1 0 0 0 1-1v-8"/><path d="M3 12L12 4l9 8"/></svg>
       <span class="nav-label">Home</span>
@@ -891,7 +888,6 @@ input, select, textarea { font-size: 16px !important; }
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       <span class="nav-label">Settings</span>
     </button>
-    </div>
   </nav>
 
   <button class="fab" onclick="openSheet()">
@@ -1105,7 +1101,7 @@ function selectFramework(id){selectedFramework=id;document.querySelectorAll('.fw
 function obGoTo(n){var cur=document.getElementById('ob'+obPage),next=document.getElementById('ob'+n);if(!cur||!next)return;cur.classList.remove('active');cur.classList.add('exit');setTimeout(function(){cur.classList.remove('exit');},420);next.classList.add('active');obPage=n;}
 function obNext(){var inp=document.getElementById('incomeInput');if(inp&&inp.value)state.income=parseFloat(inp.value)||0;obGoTo(3);}
 function obSkipIncome(){obGoTo(3);}
-function finishOnboarding(){state.onboarded=true;save();document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='flex';renderAll();}
+function finishOnboarding(){state.onboarded=true;save();document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='block';renderAll();}
 
 function openObCustomSheet(){var fw=FRAMEWORKS.custom;document.getElementById('obFwNeeds').value=fw.needs!==34?fw.needs:'';document.getElementById('obFwWants').value=fw.wants!==33?fw.wants:'';document.getElementById('obFwSavings').value=fw.savings!==33?fw.savings:'';onObCustomInput();document.getElementById('obCustomOverlay').style.display='block';document.getElementById('obCustomOverlay').classList.add('on');document.getElementById('obCustomSheet').classList.add('on');}
 function closeObCustomSheet(){document.getElementById('obCustomOverlay').classList.remove('on');document.getElementById('obCustomOverlay').style.display='none';document.getElementById('obCustomSheet').classList.remove('on');}
@@ -1132,7 +1128,7 @@ document.addEventListener('focusin',function(e){if(e.target&&e.target.type==='nu
 function _initSubcatListeners(){['subcatChips','editSubcatChips'].forEach(function(id){var el=document.getElementById(id);if(!el||el._scListened)return;el._scListened=true;el.addEventListener('click',function(e){var chip=e.target;while(chip&&chip!==el){if(chip.classList&&chip.classList.contains('cat-chip')){var chips=el.children;for(var i=0;i<chips.length;i++)chips[i].classList.remove('selected');chip.classList.add('selected');return;}chip=chip.parentNode;}});});}
 
 load();
-if(state.onboarded){document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='flex';renderAll();checkMonthRollover();}
+if(state.onboarded){document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='block';renderAll();checkMonthRollover();}
 </script>
 </body>
 </html>
