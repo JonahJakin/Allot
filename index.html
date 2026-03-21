@@ -75,19 +75,19 @@ html, body {
   display: flex; align-items: center;
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding: 8px 0 calc(env(safe-area-inset-bottom) + 4px);
+  padding: 10px 0 calc(env(safe-area-inset-bottom) + 6px);
 }
 .nav-inner {
   display: flex; width: 100%; max-width: 430px; margin: 0 auto;
 }
 .nav-btn {
   flex: 1; display: flex; flex-direction: column;
-  align-items: center; gap: 4px;
-  padding: 4px 0; border: none; background: none; cursor: pointer;
+  align-items: center; gap: 3px;
+  padding: 2px 0; border: none; background: none; cursor: pointer;
   color: var(--sub2); transition: color .2s;
 }
 .nav-btn.active { color: var(--accent); }
-.nav-btn svg { width: 22px; height: 22px; }
+.nav-btn svg { width: 20px; height: 20px; }
 .nav-label { font-size: 10px; font-weight: 500; letter-spacing: .3px; }
 
 .home-header {
@@ -372,6 +372,7 @@ html, body {
   transition: opacity .52s cubic-bezier(.25,0,.2,1), transform .52s cubic-bezier(.25,0,.2,1), visibility 0s linear .52s;
   pointer-events: none; overflow-y: auto; visibility: hidden;
   will-change: opacity, transform;
+  max-width: 430px; margin: 0 auto; width: 100%;
 }
 .ob-page.active {
   opacity: 1; transform: translateX(0); pointer-events: all; visibility: visible;
@@ -386,7 +387,7 @@ html, body {
 .onboarding {
   position: fixed; inset: 0; z-index: 50;
   background: var(--bg); display: flex; flex-direction: column;
-  max-width: 430px; margin: 0 auto; overflow: hidden;
+  overflow: hidden;
 }
 .onboarding.hidden { display: none; }
 .ob-pages-wrap { flex: 1; position: relative; overflow: hidden; }
