@@ -75,7 +75,7 @@ html, body {
   display: flex; align-items: center;
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding: 10px 0 calc(env(safe-area-inset-bottom) + 6px);
+  padding: 0 0 env(safe-area-inset-bottom);
 }
 .nav-inner {
   display: flex; width: 100%; max-width: 430px; margin: 0 auto;
@@ -83,11 +83,11 @@ html, body {
 .nav-btn {
   flex: 1; display: flex; flex-direction: column;
   align-items: center; gap: 3px;
-  padding: 2px 0; border: none; background: none; cursor: pointer;
+  padding: 10px 0 10px; border: none; background: none; cursor: pointer;
   color: var(--sub2); transition: color .2s;
 }
 .nav-btn.active { color: var(--accent); }
-.nav-btn svg { width: 20px; height: 20px; }
+.nav-btn svg { width: 22px; height: 22px; }
 .nav-label { font-size: 10px; font-weight: 500; letter-spacing: .3px; }
 
 .home-header {
