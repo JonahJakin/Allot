@@ -1105,7 +1105,7 @@ function selectFramework(id){selectedFramework=id;document.querySelectorAll('.fw
 function obGoTo(n){var cur=document.getElementById('ob'+obPage),next=document.getElementById('ob'+n);if(!cur||!next)return;cur.classList.remove('active');cur.classList.add('exit');setTimeout(function(){cur.classList.remove('exit');},420);next.classList.add('active');obPage=n;}
 function obNext(){var inp=document.getElementById('incomeInput');if(inp&&inp.value)state.income=parseFloat(inp.value)||0;obGoTo(3);}
 function obSkipIncome(){obGoTo(3);}
-function finishOnboarding(){state.onboarded=true;save();document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='';renderAll();}
+function finishOnboarding(){state.onboarded=true;save();document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='flex';renderAll();}
 
 function openObCustomSheet(){var fw=FRAMEWORKS.custom;document.getElementById('obFwNeeds').value=fw.needs!==34?fw.needs:'';document.getElementById('obFwWants').value=fw.wants!==33?fw.wants:'';document.getElementById('obFwSavings').value=fw.savings!==33?fw.savings:'';onObCustomInput();document.getElementById('obCustomOverlay').style.display='block';document.getElementById('obCustomOverlay').classList.add('on');document.getElementById('obCustomSheet').classList.add('on');}
 function closeObCustomSheet(){document.getElementById('obCustomOverlay').classList.remove('on');document.getElementById('obCustomOverlay').style.display='none';document.getElementById('obCustomSheet').classList.remove('on');}
@@ -1132,7 +1132,7 @@ document.addEventListener('focusin',function(e){if(e.target&&e.target.type==='nu
 function _initSubcatListeners(){['subcatChips','editSubcatChips'].forEach(function(id){var el=document.getElementById(id);if(!el||el._scListened)return;el._scListened=true;el.addEventListener('click',function(e){var chip=e.target;while(chip&&chip!==el){if(chip.classList&&chip.classList.contains('cat-chip')){var chips=el.children;for(var i=0;i<chips.length;i++)chips[i].classList.remove('selected');chip.classList.add('selected');return;}chip=chip.parentNode;}});});}
 
 load();
-if(state.onboarded){document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='';renderAll();checkMonthRollover();}
+if(state.onboarded){document.getElementById('onboarding').classList.add('hidden');document.getElementById('mainApp').style.display='flex';renderAll();checkMonthRollover();}
 </script>
 </body>
 </html>
